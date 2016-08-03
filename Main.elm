@@ -1,6 +1,8 @@
 module Main exposing (..)
 
-import Random.Pcg exposing (Seed, int, step)
+import Html exposing (..)
+import Html.App as Html
+import Random.Pcg exposing (Seed, int, initialSeed, step)
 
 
 type alias Model =
@@ -93,3 +95,27 @@ make model =
             { model | currentSeed = seed1 }
     in
         ( model, name )
+
+
+type Msg
+    = Whatever
+
+
+model : Model
+model =
+    { currentSeed = initialSeed 0 }
+
+
+view : Model -> Html Msg
+view model =
+    div [] []
+
+
+update : Msg -> Model -> Model
+update msg model =
+    model
+
+
+main : Program Never
+main =
+    Html.beginnerProgram { model = model, view = view, update = update }
