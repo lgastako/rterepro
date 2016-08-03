@@ -1,7 +1,7 @@
 This repo is just minimal case to reproduce an elm runtime error.
 
 
-JS Console output:
+JS Console output when you click the button:
 
     RN.make.beginSeed: Seed 1196435762 1013904223
     randNth.listLength: 3
