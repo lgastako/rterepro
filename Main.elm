@@ -2,11 +2,18 @@ module Main exposing (..)
 
 import Html exposing (..)
 import Html.App as Html
+import Html.Events exposing (..)
 import Random.Pcg exposing (Seed, int, initialSeed, step)
 
 
 type alias Model =
-    { currentSeed : Seed }
+    { currentSeed : Seed
+    , name : String
+    }
+
+
+type Msg
+    = Generate
 
 
 definitely : Maybe a -> a
@@ -97,23 +104,33 @@ make model =
         ( model, name )
 
 
-type Msg
-    = Whatever
-
-
 model : Model
 model =
-    { currentSeed = initialSeed 0 }
+    { currentSeed = initialSeed 0
+    , name = "Click the button."
+    }
 
 
 view : Model -> Html Msg
 view model =
-    div [] []
+    div []
+        [ button [ onClick Generate ] [ text "Generate random name" ]
+        , text ("The string is: " ++ model.name)
+        ]
 
 
 update : Msg -> Model -> Model
 update msg model =
-    model
+    case msg of
+        Generate ->
+            let
+                _ =
+                    Debug.log "wtf" 5
+
+                ( model, s ) =
+                    make model
+            in
+                { model | name = s }
 
 
 main : Program Never
